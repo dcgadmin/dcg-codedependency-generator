@@ -1,7 +1,7 @@
 # DCG Dependency Analyzer Generator
 
 ## Overview
-The **DCG Dependency Analyzer** is a UI tool designed to analyze dependencies between various database objects in an Oracle database. It helps users understand relationships between views, procedures, functions, and other database objects. The tool is primarily intended for analyzing code object dependencies and exporting the results as JSON for visualization.
+The [**DCG Dependency Analyzer**](https://dcgdependencyanalyzer.vercel.app/) is a UI tool designed to analyze dependencies between various database objects in an Oracle database. It helps users understand relationships between views, procedures, functions, and other database objects. The tool is primarily intended for analyzing code object dependencies and exporting the results as JSON for visualization.
 
 ## Features
 - Extracts and analyzes dependencies between Oracle database objects.
@@ -85,15 +85,18 @@ python3 dcganalyzer.py dependency-analyzer --help
 | `--include-table ` | Include Table objects as part of Dependency, Default False |
 
 Example:
+#### List all objects in the Oracle Schema
 ```sh
 python3 dcganalyzer.py dependency-analyzer --schemaname <<SCHEMANAME>> --list-objects
 
 Database Objects List : ['PROCEDURE_A', 'PROCEDURE_B', 'PACKAGE_GLOBAL_VARIABLE_TEST', 'SPORT_TEAM_ID_TRG', 'PLAYER_ID_TRG', 'SPORTING_EVENT_ID_TRG', 'GENERATE_TICKETS', 'TICKETMANAGEMENT', 'SPORTING_EVENT_TICKET_INFO', 'TRIGGER0', 'PROCEDURE_C', 'PROCEDURE_D', 'SPORT_TEAM_SEQ', 'PLAYER_SEQ', 'SPORTING_EVENT_SEQ', 'SPORTING_EVENT_TICKET_SEQ', 'SPORTING_EVENT_INFO', 'TRIGGER1']
 ```
 
+#### List all dependencies within a Object in Oracle.
 ```sh
 python3 dcganalyzer.py dependency-analyzer --schemaname <<SCHEMANAME>> --object-name <<OBJECT-NAME>>
-
+```
+```console
 Parent object : PROCEDURE_A
 Dependencies
 +-----------+---------+----------------------------------------------------+
@@ -103,10 +106,20 @@ Dependencies
 +-----------+---------+----------------------------------------------------+
 ```
 
+#### Generate Dependency JSON for Oracle Schema
 ```sh
 python3 dcganalyzer.py dependency-analyzer --schemaname <<SCHEMANAME>> --generate_json
+```
+```console
+Dependency json file is generate successfully : /home/dcgcore/codedependencyanalyzer/backend/dms_sample_dependency.json
+```
 
-Dependency json file is generate successfully : /home/dcgcore/codedependencyanalyzer/backend/DMS_SAMPLE_dependency.json
+#### Generate Dependency JSON for Oracle Schema with Tables
+```sh
+python3 dcganalyzer.py dependency-analyzer --schemaname <<SCHEMANAME>> --generate_json --include-table
+```
+```console
+Dependency json file is generate successfully : /home/dcgcore/codedependencyanalyzer/backend/dms_sample_dependency.json
 ```
 
 ## Output
